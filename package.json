@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tailwind-init": "tailwindcss init"
   },
   "dependencies": {
     "next": "15.5.4",
