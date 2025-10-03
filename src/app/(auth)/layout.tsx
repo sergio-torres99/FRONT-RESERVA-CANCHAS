@@ -17,7 +17,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Logo/Título Central */}
                 <div className="text-center mb-6">
-                    <h1 className="text-4xl font-extrabold text-teal-600">INDOOR</h1>
+                    <h1 className="text-4xl font-extrabold text-teal-600">ORBIX</h1>
                     <p className="text-gray-500 mt-1">Gestión de Canchas</p>
                 </div>
 

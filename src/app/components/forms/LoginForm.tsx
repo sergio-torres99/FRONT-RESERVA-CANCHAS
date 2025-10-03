@@ -1,25 +1,31 @@
+// ASUME QUE ESTÁ UBICADO EN src/components/forms/LoginForm.tsx
 'use client';
 
 import React, { useState } from 'react';
-import { LoginData } from '../../types/auth'; // Usamos el tipo para email y password
+import { LoginData, User } from '../../types/auth'; // Asegúrate de que 'User' también esté importado aquí
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
-// Estado inicial: solo necesitamos email y password
+// Importamos el hook useAuth para usar la función de login global
+import { useAuth } from '../../context/AuthContext';
+
+// Estado inicial
 const initialData: LoginData = {
     email: '',
     password: '',
 };
 
+// URL base de tu API
+const API_BASE_URL = 'http://localhost:8080';
+
 const LoginForm: React.FC = () => {
-    const router = useRouter();
+    // 1. OBTENER LA FUNCIÓN LOGIN DEL CONTEXTO
+    const { login } = useAuth();
 
     // Estados para el formulario y la petición
     const [formData, setFormData] = useState<LoginData>(initialData);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Manejador de Cambios (similar al de Register)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -28,54 +34,47 @@ const LoginForm: React.FC = () => {
         });
     };
 
-    // Manejador de Envío: Obtiene el token JWT
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
         setIsLoading(true);
 
         try {
-            // El endpoint de Login de tu API de Spring Boot
-            const response = await fetch('http://localhost:8080/api/auth/login', {
+            // Petición al endpoint de Login
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
 
+            // 2. Esperamos un JSON (token y datos de usuario)
+            const data = await response.json();
+
             if (response.ok) {
-                // El backend responde con el TOKEN JWT como texto plano (string)
-                const jwtToken = await response.text();
-
-                // PASO CLAVE: Guardar el token en Local Storage
-                localStorage.setItem('jwtToken', jwtToken);
-
-                // Redirigir al usuario a la vista de canchas (la primera ruta protegida)
-                router.push('/canchas');
+                // ÉXITO: El backend devolvió { token: "...", user: {...} }
+                const jwtToken: string = data.token;
+                const userData: User = { name: data.nombre };
+                // Llamamos a la función global de login
+                login(jwtToken, userData);
 
             } else if (response.status === 401) {
-                // Maneja credenciales incorrectas
                 setError('Credenciales incorrectas. Verifica tu email y contraseña.');
             } else {
-                // Otros errores del servidor
-                const errorText = await response.text();
-                setError(errorText || 'Ocurrió un error al iniciar sesión.');
+                setError(data.message || 'Ocurrió un error al iniciar sesión.');
             }
 
         } catch (err) {
-            // Error de conexión o CORS
+            console.error('Login error:', err);
             setError('Error de conexión. ¿Está el backend encendido?');
         } finally {
             setIsLoading(false);
         }
     };
 
-
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
+            {/* ... (El resto de la interfaz del formulario permanece igual) ... */}
 
-            {/* Mostrar mensajes de error */}
             {error && (
                 <p className="p-3 bg-red-100 text-red-700 rounded-md font-medium">{error}</p>
             )}
@@ -126,7 +125,6 @@ const LoginForm: React.FC = () => {
                 >
                     Crear una Cuenta
                 </Link>
-
             </div>
         </form>
     );

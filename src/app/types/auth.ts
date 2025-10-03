@@ -19,3 +19,9 @@ export interface LoginData {
 // 3. Tipo para la respuesta exitosa que la API debería dar después del login.
 // (Asumimos que la API devuelve un string con el token)
 export type AuthResponse = string;
+
+// 4. Tipo para el objeto de usuario (Ajusta esto según la respuesta de /api/me)
+export interface User {
+    name: string;
+    // Añade aquí más campos (ej: role)
+}

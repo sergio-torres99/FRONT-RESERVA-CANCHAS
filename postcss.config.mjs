@@ -1,11 +1,9 @@
-// postcss.config.mjs
-
 const config = {
   plugins: {
-    // 1. Añadimos Tailwind CSS para procesar las directivas @tailwind
-    'tailwindcss': {},
+    // CAMBIO CLAVE AQUÍ: Usamos el nombre completo del paquete.
+    '@tailwindcss/postcss': {}, 
     
-    // 2. Añadimos Autoprefixer para compatibilidad con navegadores
+    // El resto permanece igual
     'autoprefixer': {}, 
   },
 };
