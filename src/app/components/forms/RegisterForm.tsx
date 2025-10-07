@@ -96,38 +96,38 @@ const RegisterForm: React.FC = () => {
 
             {/* Campo Nombre */}
             <div>
-                <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <label htmlFor="nombre" className="block text-sm font-medium text-primary">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus:outline-none" />
             </div>
 
             {/* Campo Apellido */}
             <div>
-                <label htmlFor="apellido" className="block text-sm font-medium text-gray-700">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <label htmlFor="apellido" className="block text-sm font-medium text-primary">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus:outline-none" />
             </div>
 
             {/* Campo Email */}
             <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email:</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <label htmlFor="email" className="block text-sm font-medium text-primary">Email:</label>
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus:outline-none" />
             </div>
 
             {/* Campo Contraseña */}
             <div>
-                <label htmlFor="password">Contraseña:</label>
-                <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <label htmlFor="password" className="block text-sm font-medium text-primary">Contraseña:</label>
+                <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus:outline-none" />
             </div>
 
             {/* Campo Identificación */}
             <div>
-                <label htmlFor="identificacion" className="block text-sm font-medium text-gray-700">Identificación:</label>
-                <input type="text" id="identificacion" name="identificacion" value={formData.identificacion} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <label htmlFor="identificacion" className="block text-sm font-medium text-primary">Identificación:</label>
+                <input type="text" id="identificacion" name="identificacion" value={formData.identificacion} onChange={handleChange} required className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus:outline-none" />
             </div>
 
             {/* Campo Teléfono */}
             <div>
-                <label htmlFor="telefono" className="block text-sm font-medium text-gray-700">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <label htmlFor="telefono" className="block text-sm font-medium text-primary">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus:outline-none" />
             </div>
 
             {/* --- BOTONES DE ACCIÓN --- */}
@@ -135,8 +135,8 @@ const RegisterForm: React.FC = () => {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full py-2 px-4 font-semibold rounded-md shadow-md transition ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
-                        } text-white focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                    className={`w-full py-2 px-4 font-semibold rounded-md shadow-md transition ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primary/70 cursor-pointer'
+                        } text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2`}
                 >
                     {isLoading ? 'Registrando...' : 'Registrar'}
                 </button>
@@ -144,9 +144,9 @@ const RegisterForm: React.FC = () => {
                 {/* Botón de Regresar/Login */}
                 <Link
                     href="/login"
-                    className="block text-center mt-3 w-full py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-md shadow-md hover:bg-gray-300 transition"
+                    className="block text-center mt-3 w-full py-2 px-4 bg-primary text-secondary font-semibold rounded-md shadow-md hover:bg-primary/70 transition"
                 >
-                    Ya tengo cuenta, Iniciar Sesión
+                    Iniciar Sesión
                 </Link>
 
             </div>

@@ -4,13 +4,13 @@ import Link from 'next/link';
 export default function HomePage() {
   return (
     // Contenedor principal centrado
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-primary">
       
       {/* Título y descripción */}
-      <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-        Sistema de Reserva de Canchas ⚽
+      <h1 className="text-4xl font-extrabold text-secondary mb-4">
+        Gestor de Reserva de Canchas
       </h1>
-      <p className="text-xl text-gray-600 mb-10">
+      <p className="text-xl text-secondary mb-10">
         Comienza creando una cuenta o iniciando sesión.
       </p>
 
@@ -20,7 +20,7 @@ export default function HomePage() {
         {/* Enlace al Registro */}
         <Link 
           href="/register"
-          className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-150"
+          className="px-6 py-3 bg-secondary text-primary font-semibold rounded-lg shadow-md hover:bg-secondary/70 transition duration-150"
         >
           Crear Cuenta
         </Link>
@@ -28,7 +28,7 @@ export default function HomePage() {
         {/* Enlace al Login */}
         <Link 
           href="/login"
-          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-150"
+          className="px-6 py-3 bg-secondary text-primary font-semibold rounded-lg shadow-md hover:bg-secondary/70 transition duration-150"
         >
           Iniciar Sesión
         </Link>

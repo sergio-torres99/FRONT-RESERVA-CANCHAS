@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 /* Dejar las directivas de Tailwind al inicio */
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
-/* Definición de la Paleta de Colores como Variables CSS */
-:root {
+@theme {
     --color-primary: #437118;
     /* Fern green */
     --color-secondary: #AFD06E;
@@ -20,9 +19,5 @@
     --color-text-dark: #1f2937;
     --color-success: #059669;
     --color-danger: #dc2626;
-}
 
-body {
-    background-color: var(--color-background);
-    color: var(--color-text-dark);
 }

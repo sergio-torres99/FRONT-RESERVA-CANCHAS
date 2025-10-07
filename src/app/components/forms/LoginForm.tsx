@@ -81,7 +81,7 @@ const LoginForm: React.FC = () => {
 
             {/* --- CAMPO EMAIL --- */}
             <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email:</label>
+                <label htmlFor="email" className="block text-sm font-medium text-primary">Email:</label>
                 <input
                     type="email"
                     id="email"
@@ -89,13 +89,13 @@ const LoginForm: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus: outline-none"
                 />
             </div>
 
             {/* --- CAMPO CONTRASEÑA --- */}
             <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña:</label>
+                <label htmlFor="password" className="block text-sm font-medium text-primary">Contraseña:</label>
                 <input
                     type="password"
                     id="password"
@@ -103,7 +103,7 @@ const LoginForm: React.FC = () => {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus: outline-none"
                 />
             </div>
 
@@ -112,8 +112,8 @@ const LoginForm: React.FC = () => {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full py-2 px-4 font-semibold rounded-md shadow-md transition ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500'
-                        } text-white focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                    className={`w-full py-2 px-4 font-semibold rounded-md shadow-md transition ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primary/70 cursor-pointer'
+                        } text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2`}
                 >
                     {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                 </button>
@@ -121,7 +121,7 @@ const LoginForm: React.FC = () => {
                 {/* Botón de Regresar/Registrar */}
                 <Link
                     href="/register"
-                    className="block text-center mt-3 w-full py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded-md shadow-md hover:bg-gray-300 transition"
+                    className="block text-center mt-3 w-full py-2 px-4 bg-primary text-secondary font-semibold rounded-md shadow-md hover:bg-primary/70 transition"
                 >
                     Crear una Cuenta
                 </Link>
