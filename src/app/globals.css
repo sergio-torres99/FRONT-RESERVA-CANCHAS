@@ -6,18 +6,24 @@
 @tailwind utilities; */
 
 @theme {
-    --color-primary: #437118;
-    /* Fern green */
-    --color-secondary: #AFD06E;
-    /* Pistachio */
-    --color-info: #87AECE;
-    /* Carolina blue */
-    --color-background: #F5F3D8;
-    /* Beige */
+  --color-primary: #437118;
+  /* Fern green */
+  --color-secondary: #afd06e;
+  /* Pistachio */
+  --color-info: #87aece;
+  /* Carolina blue */
+  --color-background: #f5f3d8;
+  /* Beige */
 
-    /* Soporte y Estado (ajustados para contraste) */
-    --color-text-dark: #1f2937;
-    --color-success: #059669;
-    --color-danger: #dc2626;
+  /* Soporte y Estado (ajustados para contraste) */
+  --color-text-dark: #1f2937;
+  --color-success: #059669;
+  --color-danger: #dc2626;
 
+  /* New Palette -------------------------------*/
+  --color-green-light: #44BE67;
+  --color-green-dark: #3B9452;
+  --color-text-primary: #1D1B26;
+  --color-text-secondary: #1D1B26;
+  --color-custom-white: #FAFFF9;
 }

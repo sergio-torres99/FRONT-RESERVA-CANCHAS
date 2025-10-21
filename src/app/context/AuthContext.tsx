@@ -84,7 +84,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             if (res.ok) {
                 // CASO 1: Token Válido (200 OK)
                 const data = await res.json();
-                const userData: User = { name: data.username };
+                const userData: User = { name: data.username, id: data.id };
+                console.log('Sesión restaurada para el usuario:', userData);
                 setUser(userData);
             } else if (res.status === 401 || res.status === 403) {
                 // CASO 3: Token Expirado o Inválido (401/403)
