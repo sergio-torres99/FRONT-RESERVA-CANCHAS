@@ -8,7 +8,7 @@ export default function Dashboard() {
     <div>
       <header className="p-5 flex justify-between items-center sticky top-0 z-10">
         <div className="text-3xl text-text-dark font-medium capitalize">
-          Bienvenido: {user?.name}
+          Hola, {user?.name}
         </div>
       </header>
     </div>
