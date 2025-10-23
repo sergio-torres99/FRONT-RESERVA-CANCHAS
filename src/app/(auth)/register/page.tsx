@@ -1,11 +1,13 @@
-import RegisterForm from '../../components/forms/RegisterForm';
+import RegisterForm from "../../components/forms/RegisterForm";
 
 export default function RegisterPage() {
-    return (
-        // Hemos reemplazado los estilos inline con clases básicas de Tailwind
-        <div className="mx-auto max-w-md p-8 mt-10 border border-primary rounded-xl shadow-lg bg-secondary">
-            <h1 className="text-3xl font-bold text-center mb-6 text-primary">Crear Cuenta</h1>
-            <RegisterForm />
-        </div>
-    );
+  return (
+    <div className="p-25 rounded-xl bg-custom-white w-180 flex flex-col gap-2 justify-center shrink h-full">
+      <h1 className="text-5xl font-bold text-green-dark">Crear cuenta</h1>
+      <p className="text-lg text-green-dark mb-5">
+        Crea tu cuenta para empezar a reservar canchas
+      </p>
+      <RegisterForm />
+    </div>
+  );
 }

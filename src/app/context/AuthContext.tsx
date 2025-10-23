@@ -10,9 +10,7 @@ import React, {
 } from "react";
 import { useRouter } from "next/navigation";
 import { User } from "../types/auth"; // Asegúrate de que 'User' esté definido en types/auth
-
-// URL base de tu backend (Asegúrate que esta URL sea correcta)
-const API_BASE_URL = "http://localhost:8080";
+import { API_BASE_URL } from "../utils/constants";
 
 // Tipos de Datos
 // -----------------------------------------------------------
@@ -60,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     localStorage.removeItem("authToken");
     setUser(null);
-    router.push("/login");
+    router.push("/");
   };
 
   // C. Lógica para cargar/verificar el token guardado (Sesión Persistente)

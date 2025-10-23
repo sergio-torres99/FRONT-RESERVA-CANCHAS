@@ -21,9 +21,28 @@
   --color-danger: #dc2626;
 
   /* New Palette -------------------------------*/
-  --color-green-light: #44BE67;
-  --color-green-dark: #3B9452;
-  --color-text-primary: #1D1B26;
-  --color-text-secondary: #1D1B26;
-  --color-custom-white: #FAFFF9;
+  --color-green-light: #44be67;
+  --color-green-dark: #0d4a2b;
+  --color-text-primary: #1d1b26;
+  --color-text-secondary: #1d1b26;
+  --color-custom-white: #fafff9;
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* ancho del scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* fondo del track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* color del thumb (parte que se mueve) */
+  border-radius: 9999px; /* lo hace totalmente redondeado */
+  border: 2px solid transparent; /* opcional, para que no se vea muy grueso */
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* color al pasar el mouse */
 }

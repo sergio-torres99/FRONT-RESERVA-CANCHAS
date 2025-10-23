@@ -1,28 +1,36 @@
 // src/app/(auth)/layout.tsx
-import React from 'react';
+import React from "react";
 
 /**
  * Layout para las rutas de autenticación (Login, Register).
  * Proporciona un contenedor simple y centrado, sin la navegación principal.
  */
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
-    return (
-        // min-h-screen: Altura mínima de la pantalla
-        // flex items-center justify-center: Centra el contenido vertical y horizontalmente
-        // bg-gray-100: Fondo gris claro para darle contraste
-        <div className="min-h-screen flex items-center justify-center bg-primary p-4">
-
-            {/* Contenedor del formulario */}
-            <div className="w-full max-w-sm p-8 bg-secondary rounded-xl shadow-2xl">
-
-                {/* Logo/Título Central */}
-                <div className="text-center mb-6">
-                    <h1 className="text-4xl font-extrabold text-primary">ORBIX</h1>
-                    <p className="text-primary mt-1">Gestión de Canchas</p>
-                </div>
-
-                {children} {/* Aquí se insertará el formulario de Login o Register */}
-            </div>
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="relative w-full h-screen bg-custom-white rounded-3xl p-5">
+      <div className="w-full h-full absolute inset-0 rounded-3xl p-5">
+        <div className="relative w-full h-full inset-0">
+          <img
+            src="soccer-image.jpg"
+            alt=""
+            className="w-full h-full object-cover rounded-3xl opacity-80 -z-10"
+          />
+          <div className="absolute inset-0 bg-black/60 rounded-3xl"></div>
         </div>
-    );
+      </div>
+      <div className="relative flex w-full h-full justify-between items-center p-5">
+        <div className="ml-20 text-custom-white">
+          <p className="text-9xl font-bold">ORBIX</p>
+          <p className="text-3xl">
+            Organiza tus reservas de forma simple y eficiente
+          </p>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
 }

@@ -3,7 +3,7 @@ import "./globals.css";
 import { AuthProvider } from './context/AuthContext'; 
 
 export const metadata: Metadata = {
-  title: "Reserva Canchas | ORBIX",
+  title: "ORBIX | Reserva Canchas",
   description: "Sistema de reserva de canchas ORBIX",
 };
 

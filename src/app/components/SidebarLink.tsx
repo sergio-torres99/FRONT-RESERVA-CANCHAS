@@ -14,7 +14,7 @@ const SidebarLink = ({ href, children }: SidebarLinkProps) => {
     <li>
       <Link
         href={href}
-        className={`flex items-center space-x-3 w-100 px-4 py-3 rounded-xl text-custom-white font-semibold  hover:bg-custom-white/30 hover:text-text-secondary transition duration-150 ${
+        className={`flex items-center space-x-3 w-100 px-4 py-3 rounded-4xl text-custom-white font-semibold  hover:bg-custom-white/30 hover:text-text-secondary transition duration-150 ${
           parsedCurrentPathname === href
             ? "bg-custom-white text-text-secondary hover:bg-custom-white/100"
             : ""

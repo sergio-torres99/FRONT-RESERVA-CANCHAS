@@ -25,14 +25,14 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         </div>
         <button
           onClick={logout}
-          className="flex items-center justify-center space-x-3 w-full px-4 py-3 rounded-xl bg-green-light text-custom-white font-semibold hover:bg-custom-white hover:text-text-secondary transition duration-150 cursor-pointer"
+          className="flex items-center justify-center space-x-3 w-full px-4 py-3 rounded-4xl bg-custom-white text-text-secondary font-semibold hover:bg-custom-white hover:scale-102 transition duration-150 cursor-pointer"
         >
           <span>Cerrar Sesión</span>
         </button>
       </aside>
-      <main className="flex-1 flex flex-col overflow-y-auto bg-custom-white">
-        <div className="flex-grow p-6 bg-custom-white">{children}</div>
+      <main className="flex-1 flex flex-col bg-green-dark p-4 pl-0">
+        <div className="flex-grow bg-custom-white rounded-2xl p-6 overflow-y-auto">{children}</div>
       </main>
-    </div>
+    </div>  
   );
 }

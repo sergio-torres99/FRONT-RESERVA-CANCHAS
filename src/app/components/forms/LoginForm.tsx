@@ -79,9 +79,7 @@ const LoginForm: React.FC = () => {
   }, [push]);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {/* ... (El resto de la interfaz del formulario permanece igual) ... */}
-
+    <form onSubmit={handleSubmit} className="space-y-7">
       {error && (
         <p className="p-3 bg-red-100 text-red-700 rounded-md font-medium">
           {error}
@@ -89,10 +87,10 @@ const LoginForm: React.FC = () => {
       )}
 
       {/* --- CAMPO EMAIL --- */}
-      <div>
+      <div className="flex flex-col gap-3">
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-primary"
+          className="block text-lg font-medium text-green-dark"
         >
           Email:
         </label>
@@ -103,15 +101,15 @@ const LoginForm: React.FC = () => {
           value={formData.email}
           onChange={handleChange}
           required
-          className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus: outline-none"
+          className="block w-full border border-green-dark rounded-4xl shadow-sm py-2 px-3 focus: outline-none"
         />
       </div>
 
       {/* --- CAMPO CONTRASEÑA --- */}
-      <div>
+      <div className="flex flex-col gap-3">
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-primary"
+          className="block text-lg font-medium text-green-dark"
         >
           Contraseña:
         </label>
@@ -122,31 +120,31 @@ const LoginForm: React.FC = () => {
           value={formData.password}
           onChange={handleChange}
           required
-          className="mt-1 block w-full border border-primary rounded-md shadow-sm p-2 focus: outline-none"
+          className="block w-full border border-green-dark rounded-4xl shadow-sm py-2 px-3 focus: outline-none"
         />
       </div>
 
       {/* --- BOTONES DE ACCIÓN --- */}
-      <div className="pt-2">
+      <div className="pt-2 flex  flex-col items-center gap-5">
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-2 px-4 font-semibold rounded-md shadow-md transition ${
+          className={`w-full py-2 px-4 font-semibold rounded-4xl shadow-md transition ${
             isLoading
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-primary hover:bg-primary/70 cursor-pointer"
-          } text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2`}
+              : "bg-green-dark hover:bg-green-dark/90 cursor-pointer"
+          } text-custom-white focus:outline-none focus:ring-2 focus:ring-offset-2`}
         >
           {isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
         </button>
 
         {/* Botón de Regresar/Registrar */}
-        <Link
-          href="/register"
-          className="block text-center mt-3 w-full py-2 px-4 bg-primary text-secondary font-semibold rounded-md shadow-md hover:bg-primary/70 transition"
-        >
-          Crear una Cuenta
-        </Link>
+        <p className="flex gap-2">
+          ¿No tienes una cuenta?
+          <Link href="/register" className="font-semibold hover:scale-102 transition duration-75 text-green-dark">
+            Regístrate aquí
+          </Link>
+        </p>
       </div>
     </form>
   );
