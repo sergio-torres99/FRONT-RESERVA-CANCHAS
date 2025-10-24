@@ -1,14 +1,14 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  ReactNode,
-} from "react";
 import { useRouter } from "next/navigation";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { User } from "../types/auth"; // Asegúrate de que 'User' esté definido en types/auth
 import { API_BASE_URL } from "../utils/constants";
 
@@ -19,7 +19,6 @@ import { API_BASE_URL } from "../utils/constants";
 interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
-  isLoading: boolean;
   login: (token: string, userData: User) => void;
   logout: () => void;
 }
@@ -42,7 +41,6 @@ export const useAuth = () => {
 // -----------------------------------------------------------
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter(); // Hook de Next.js para manejar redirecciones
 
   const isLoggedIn = !!user;
@@ -67,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // Si no hay token guardado, terminamos el chequeo.
     if (!token) {
-      setIsLoading(false);
+      router.push("/");
       return;
     }
 
@@ -103,9 +101,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
       localStorage.removeItem("authToken");
       setUser(null);
-    } finally {
-      // La carga SIEMPRE debe terminar
-      setIsLoading(false);
     }
   }, []); // Array vacío: La función es estable y solo se crea una vez.
 
@@ -118,7 +113,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     user,
     isLoggedIn,
-    isLoading,
     login,
     logout,
   };

@@ -10,3 +10,10 @@ export type Court = {
     time_slots: string[];
   };
 };
+
+export type CourtsResponse = {
+  id: string;
+  nombre: string;
+  tipoCancha: string;
+  precioPorHora: number;
+}[];

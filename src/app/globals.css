@@ -46,3 +46,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #6b7280; /* color al pasar el mouse */
 }
+
+@layer utilities {
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+}
