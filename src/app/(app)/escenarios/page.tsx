@@ -34,12 +34,25 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="">
+    <>
       <div className="g w-4/5 mx-auto gap-2.5">
         <h1 className="text-4xl font-bold mb-8">Escenarios Disponibles</h1>
       </div>
+      {isLoadingCourts && (
+        <div className="w-4/5 mx-auto p-4">
+          <div className="animate-pulse space-x-4">
+            <div className="grid grid-cols-3 gap-5">
+              <div className="h-50 2xl:h-70 rounded-3xl bg-gray-300" />
+              <div className="h-50 2xl:h-70 rounded-3xl bg-gray-300" />
+              <div className="h-50 2xl:h-70 rounded-3xl bg-gray-300" />
+              <div className="h-50 2xl:h-70 rounded-3xl bg-gray-300" />
+              <div className="h-50 2xl:h-70 rounded-3xl bg-gray-300" />
+              <div className="h-50 2xl:h-70 rounded-3xl bg-gray-300" />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="grid grid-cols-3 w-4/5 mx-auto gap-2.5">
-        {isLoadingCourts && <p>Cargando Escenarios...</p>}
         {!isLoadingCourts &&
           courts.map(({ id, address, name }) => (
             <div
@@ -68,7 +81,7 @@ const Page = () => {
             </div>
           ))}
       </div>
-    </div>
+    </>
   );
 };
 

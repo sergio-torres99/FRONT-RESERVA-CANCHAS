@@ -129,7 +129,7 @@ const LoginForm: React.FC = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-2 px-4 font-semibold rounded-4xl shadow-md transition ${
+          className={`w-1/2 py-2 px-4 font-semibold rounded-4xl shadow-md transition ${
             isLoading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-green-dark hover:bg-green-dark/90 cursor-pointer"

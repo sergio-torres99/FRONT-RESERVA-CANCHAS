@@ -23,9 +23,9 @@ export default function AuthLayout({
         </div>
       </div>
       <div className="relative flex w-full h-full justify-between items-center p-5">
-        <div className="ml-20 text-custom-white">
-          <p className="text-9xl font-bold">ORBIX</p>
-          <p className="text-3xl">
+        <div className="ml-7 lg:ml-15 text-custom-white">
+          <p className="text-6xl lg:text-8xl font-bold">ORBIX</p>
+          <p className="text-xl lg:text-2xl">
             Organiza tus reservas de forma simple y eficiente
           </p>
         </div>

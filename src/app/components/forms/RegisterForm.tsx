@@ -82,7 +82,7 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-2 2xl:space-y-4">
       {/* Mensajes de Estado (Éxito y Error) */}
       {success && (
         <p className="p-3 bg-green-100 text-green-700 rounded-4xl font-medium">
@@ -95,17 +95,12 @@ const RegisterForm: React.FC = () => {
         </p>
       )}
 
-      {/* --- CAMPOS DEL FORMULARIO --- */}
-      {/* Nota: Todos los inputs usan value={formData.[nombre]} y onChange={handleChange}. 
-        Esto se llama 'Controlled Component' en React.
-      */}
-
       <div className="grid grid-cols-2 gap-3">
         {/* Campo Nombre */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1 2xl:gap-3">
           <label
             htmlFor="nombre"
-            className="block text-lg font-medium text-green-dark"
+            className="block text-md 2xl:text-lg font-medium text-green-dark"
           >
             Nombre:
           </label>
@@ -121,10 +116,10 @@ const RegisterForm: React.FC = () => {
         </div>
 
         {/* Campo Apellido */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1 2xl:gap-3">
           <label
             htmlFor="apellido"
-            className="block text-lg font-medium text-green-dark"
+            className="block text-md 2xl:text-lg font-medium text-green-dark"
           >
             Apellido:
           </label>
@@ -141,10 +136,10 @@ const RegisterForm: React.FC = () => {
       </div>
 
       {/* Campo Email */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1 2xl:gap-3">
         <label
           htmlFor="email"
-          className="block text-lg font-medium text-green-dark"
+          className="block text-md 2xl:text-lg font-medium text-green-dark"
         >
           Email:
         </label>
@@ -160,10 +155,10 @@ const RegisterForm: React.FC = () => {
       </div>
 
       {/* Campo Contraseña */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1 2xl:gap-3">
         <label
           htmlFor="password"
-          className="block text-lg font-medium text-green-dark"
+          className="block text-md 2xl:text-lg font-medium text-green-dark"
         >
           Contraseña:
         </label>
@@ -180,10 +175,10 @@ const RegisterForm: React.FC = () => {
 
       {/* Campo Identificación */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1 2xl:gap-3">
           <label
             htmlFor="identificacion"
-            className="block text-lg font-medium text-green-dark"
+            className="block text-md 2xl:text-lg font-medium text-green-dark"
           >
             Identificación:
           </label>
@@ -199,10 +194,10 @@ const RegisterForm: React.FC = () => {
         </div>
 
         {/* Campo Teléfono */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1 2xl:gap-3">
           <label
             htmlFor="telefono"
-            className="block text-lg font-medium text-green-dark"
+            className="block text-md 2xl:text-lg font-medium text-green-dark"
           >
             Teléfono:
           </label>
@@ -219,11 +214,11 @@ const RegisterForm: React.FC = () => {
       </div>
 
       {/* --- BOTONES DE ACCIÓN --- */}
-      <div className="pt-2 flex flex-col gap-5 items-center mt-8">
+      <div className="pt-2 flex flex-col gap-2 2xl:gap-5 items-center mt-8">
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-2 px-4 font-semibold rounded-4xl shadow-md transition ${
+          className={`w-1/2 py-2 px-4 font-semibold rounded-4xl shadow-md transition ${
             isLoading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-green-dark hover:bg-green-dark/70 cursor-pointer"

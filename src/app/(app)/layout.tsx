@@ -1,8 +1,9 @@
 "use client";
+import Link from "next/link";
 import { ReactNode } from "react";
 import SidebarLink from "../components/SidebarLink";
-import { sidebarOptions } from "../utils/constants";
 import { useAuth } from "../context/AuthContext";
+import { sidebarOptions } from "../utils/constants";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const { logout } = useAuth();
@@ -11,9 +12,12 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     <div className="flex h-screen bg-background-light">
       <aside className="w-64 flex-shrink-0 bg-green-dark p-6 flex flex-col justify-between shadow-2xl">
         <div>
-          <h2 className="text-4xl font-extrabold text-center text-background-light tracking-wider text-custom-white">
+          <Link
+            href="/dashboard"
+            className="text-4xl font-extrabold text-center text-background-light tracking-wider text-custom-white block"
+          >
             ORBIX
-          </h2>
+          </Link>
           <hr className="my-5 p-2" style={{ color: "#44BE67" }} />
           <ul className="space-y-2 flex flex-col">
             {sidebarOptions.map((opt) => (
@@ -31,8 +35,10 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         </button>
       </aside>
       <main className="flex-1 flex flex-col bg-green-dark p-4 pl-0">
-        <div className="flex-grow bg-custom-white rounded-2xl p-6 overflow-y-auto">{children}</div>
+        <div className="flex-grow bg-custom-white rounded-2xl p-6 overflow-y-auto">
+          {children}
+        </div>
       </main>
-    </div>  
+    </div>
   );
 }

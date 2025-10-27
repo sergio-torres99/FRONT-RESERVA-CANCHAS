@@ -111,7 +111,19 @@ const Cancha = () => {
   return (
     <div className="w-4/5 mx-auto flex flex-col gap-2">
       {isLoadingData ? (
-        <p>Cargando cancha...</p>
+        <div className="w-full h-full p-4">
+          <div className="animate-pulse space-x-4">
+            <div className="grid grid-cols-[2fr_1fr] gap-5">
+              <div className="space-y-5">
+                <div className="h-70 2xl:h-100 rounded-3xl bg-gray-300" />
+                <div className="h-10 2xl:h-20 rounded-3xl bg-gray-300" />
+                <div className="h-10 2xl:h-20 rounded-3xl bg-gray-300" />
+                <div className="h-10 2xl:h-20 rounded-3xl bg-gray-300" />
+              </div>
+              <div className="space-y-3 rounded-3xl bg-gray-300" />
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="flex flex-col gap-7">
           {/* Cancha Header */}
@@ -152,7 +164,7 @@ const Cancha = () => {
             </div>
 
             {/* Bloques disponibles */}
-            <div className="bg-gray-200 rounded-2xl p-5">
+            <div className="bg-gray-300 rounded-2xl p-5">
               {/* <p>{date}</p> */}
               <div className="flex gap-3 items-end">
                 <p className="text-4xl font-bold text-custom-white">{price} </p>
