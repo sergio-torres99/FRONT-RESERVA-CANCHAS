@@ -77,13 +77,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           Authorization: `Bearer ${token}`, // Enviamos el token al backend
         },
       });
-      console.log(res.ok);
 
       if (res.ok) {
         // CASO 1: Token Válido (200 OK)
         const data = await res.json();
 
-        console.log(data);
         const userData: User = { name: data.username, id: data.id };
         console.log("Sesión restaurada para el usuario:", userData);
         setUser(userData);

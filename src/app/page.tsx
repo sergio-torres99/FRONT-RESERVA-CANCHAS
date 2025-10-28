@@ -27,7 +27,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="p-5 flex justify-between z-10">
-        <span className="text-green-dark font-extrabold text-4xl md:text-5xl">ORBIX</span>
+        <span className="text-green-dark font-extrabold text-4xl md:text-5xl tracking-wider">ORBIX</span>
         <Link
           href="/login"
           className="bg-green-dark text-custom-white py-2 pb-3 px-5 rounded-4xl hover:scale-105 transition duration-150 cursor-pointer text-lg md:text-xl font-normal"
@@ -54,8 +54,6 @@ export default function HomePage() {
               src="right-arrow.png"
               alt="right-arrow"
               className="w-5 h-5 md:w-6 md:h-6"
-              // width={25}
-              // height={25}
             />
           </div>
         </Link>

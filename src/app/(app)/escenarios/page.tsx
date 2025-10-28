@@ -12,12 +12,10 @@ const Page = () => {
   const { push } = useRouter();
   const { apiClient } = useApi();
 
-  console.log(courts);
-
   const getAllCourts = async () => {
     try {
       setIsLoadingCourts(true);
-      const courtsDataResponse = await apiClient<CourtsResponse>(
+      const courtsDataResponse = await apiClient<CourtsResponse[]>(
         "/api/canchas"
       );
       const dataFormateada = formatearRespuesta(courtsDataResponse);

@@ -1,6 +1,6 @@
 import { Court, CourtsResponse } from "../types/escenarios";
 
-export const formatearRespuesta = (courtsData: CourtsResponse) =>
+export const formatearRespuesta = (courtsData: CourtsResponse[]) =>
   courtsData.map((c) => ({
     address: "",
     available_date: { date: "", time_slots: [] },
