@@ -4,6 +4,7 @@ export type Court = {
   address: string;
   price: string;
   img: string;
+  type: string;
 };
 
 export type CourtsResponse = {
