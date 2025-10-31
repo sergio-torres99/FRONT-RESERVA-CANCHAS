@@ -1,5 +1,5 @@
 export type Court = {
-  id: string;
+  id: number;
   name: string;
   address: string;
   price: string;
@@ -8,7 +8,7 @@ export type Court = {
 };
 
 export type CourtsResponse = {
-  id: string;
+  id: number;
   nombre: string;
   tipoCancha: string;
   precioPorHora: number;

@@ -1,0 +1,11 @@
+td {
+  padding: 15px;
+}
+
+tr:last-child {
+  border: none;
+}
+
+th {
+  padding: 15px;
+}

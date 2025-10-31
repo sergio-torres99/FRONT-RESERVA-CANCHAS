@@ -1,8 +1,8 @@
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import useApi from "../hooks/useApi";
 import { Court } from "../types/escenarios";
+import { formatearFecha } from "../utils/functions";
 
 type ConfirmationModalProps = {
   open: boolean;
@@ -10,13 +10,10 @@ type ConfirmationModalProps = {
   courtData: Court;
   selectedDate: string;
   selectedTime: string;
+  setOpenToast: Dispatch<SetStateAction<boolean>>;
+  openToast: boolean;
+  setTimeSlots: Dispatch<SetStateAction<string[]>>;
 };
-
-function formatearFecha(fechaISO: string) {
-  const [year, month, day] = fechaISO.split("-");
-  console.log({ year, month, day });
-  return `${day}/${month}/${year}`;
-}
 
 const ConfirmationModal = ({
   open,
@@ -24,9 +21,11 @@ const ConfirmationModal = ({
   courtData,
   selectedDate,
   selectedTime,
+  setOpenToast,
+  openToast,
+  setTimeSlots,
 }: ConfirmationModalProps) => {
   const { user } = useAuth();
-  const { push } = useRouter();
   const { apiClient } = useApi();
   const { name, price, type, id: courtId } = courtData;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,23 +36,34 @@ const ConfirmationModal = ({
     try {
       setIsSubmitting(true);
       const [startTime, endTime] = selectedTime.split("-");
-      console.log({ startTime, endTime });
       await apiClient("/api/reservas", {
         method: "POST",
         body: JSON.stringify({
           canchaId: courtId,
           usuarioId: user?.id ?? "",
-          fechaHoraInicio: startTime.trim() ?? "",
-          fechaHoraFin: endTime.trim() ?? "",
+          horaInicio: startTime.trim() ?? "",
+          horaFin: endTime.trim() ?? "",
+          fechaReserva: selectedDate,
         }),
       });
       await new Promise((res) => setTimeout(() => res([]), 2000));
+      setOpen(false);
+      setOpenToast(true);
+      setTimeSlots((prev) => prev.filter((slot) => slot !== selectedTime));
     } catch (error) {
       console.error(error);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (openToast) {
+      setTimeout(() => {
+        setOpenToast(false);
+      }, 6000);
+    }
+  }, [openToast, setOpenToast]);
 
   return (
     open && (
@@ -121,11 +131,7 @@ const ConfirmationModal = ({
               Cancelar
             </button>
             <button
-              onClick={async () => {
-                await handleCourtBooking();
-                setOpen(false);
-                push("/escenarios");
-              }}
+              onClick={handleCourtBooking}
               className="w-full bg-green-dark text-custom-white p-3 rounded-2xl cursor-pointer uppercase font-semibold hover:scale-102 transition duration-75"
             >
               {isSubmitting ? "Cargando..." : "Confirmar"}

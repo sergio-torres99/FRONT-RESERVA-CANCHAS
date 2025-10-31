@@ -8,21 +8,6 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
-const mockTimeSlots = [
-  "08:00 - 09:00",
-  "09:00 - 10:00",
-  "10:00 - 11:00",
-  "11:00 - 12:00",
-  "12:00 - 13:00",
-  "13:00 - 14:00",
-  "14:00 - 15:00",
-  "15:00 - 16:00",
-  "16:00 - 17:00",
-  "17:00 - 18:00",
-  "18:00 - 19:00",
-  "19:00 - 20:00",
-];
-
 const Cancha = () => {
   const { id }: { id: string } = useParams();
   const { back } = useRouter();
@@ -33,6 +18,7 @@ const Cancha = () => {
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
   const [isTimeSlotsLoading, setIsTimeSlotsLoading] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+  const [openToast, setOpenToast] = useState(false);
   const { apiClient } = useApi();
 
   const { name, img } = courtData;
@@ -71,17 +57,12 @@ const Cancha = () => {
       const {
         target: { value },
       } = e;
+      if (!value) return;
       setBookingDay(value);
-      // const availableTimeSlots = await apiClient(
-      //   `/api/canchass/${id}?selected_day=${value}`
-      // );
-      // setTimeSlots((availableTimeSlots as []) ?? []);
-      await new Promise((res) =>
-        setTimeout(() => {
-          setTimeSlots(mockTimeSlots);
-          res([]);
-        }, 2000)
+      const availableTimeSlots = await apiClient<string[]>(
+        `/api/reservas/slots-disponibles?canchaId=${id}&fecha=${value}`
       );
+      setTimeSlots(availableTimeSlots);
     } catch (error) {
       console.error(error);
       setTimeSlots([]);
@@ -190,7 +171,15 @@ const Cancha = () => {
         courtData={courtData}
         selectedDate={bookingDay}
         selectedTime={selectedTime}
+        setOpenToast={setOpenToast}
+        openToast={openToast}
+        setTimeSlots={setTimeSlots}
       />
+      {openToast && (
+        <div className="absolute top-5 right-5 animate-bounce duration-1000 bg-green-light shadow-2xl p-4 rounded-2xl text-xl rounded-tr-none rounded-br-none border-r-4 border-green-dark">
+          ¡Todo listo! Su reserva ha sido guardada correctamente.
+        </div>
+      )}
     </>
   );
 };

@@ -14,8 +14,27 @@ const useApi = () => {
         "Content-Type": "application/json",
       },
     });
-    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-    return res.json() as Promise<T>;
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`HTTP error! Status: ${res.status} - ${errorText}`);
+    }
+
+    if (res.status === 204) {
+      return {} as T;
+    }
+
+    const text = await res.text();
+    if (!text) {
+      return {} as T;
+    }
+
+    try {
+      return JSON.parse(text) as T;
+    } catch (e) {
+      console.error("Failed to parse JSON:", e, text);
+      throw new Error("Invalid JSON response");
+    }
   }
 
   return { apiClient };
