@@ -4,7 +4,7 @@ import CourtIndications from "@/app/components/CourtIndications";
 import useApi from "@/app/hooks/useApi";
 import { Court, CourtsResponse } from "@/app/types/escenarios";
 import { defaultCourt } from "@/app/utils/constants";
-import Image from "next/image";
+import { formatoCOP } from "@/app/utils/functions";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ const Cancha = () => {
   const { back } = useRouter();
   const [courtData, setCourtData] = useState<Court>(defaultCourt);
   const [isLoadingData, setIsLoadingData] = useState(false);
-  const [bookingDay, setBookingDay] = useState("");
+  const [bookingDate, setBookingDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
   const [isTimeSlotsLoading, setIsTimeSlotsLoading] = useState(false);
@@ -21,7 +21,8 @@ const Cancha = () => {
   const [openToast, setOpenToast] = useState(false);
   const { apiClient } = useApi();
 
-  const { name, img } = courtData;
+  const { name, img, address, price, type } = courtData;
+  const noTimeSlotsFound = timeSlots.length === 0;
 
   const getCourtById = async () => {
     try {
@@ -34,15 +35,19 @@ const Cancha = () => {
         precioPorHora,
         id: courtId,
         tipoCancha,
+        imagenURL,
+        ubicacion,
       } = courtDataResponse;
+
       const parsedCourt: Court = {
-        address: "Calle 44 #47a - 22",
+        address: ubicacion,
         id: courtId,
-        img: "https://civideportes.com.co/wp-content/uploads/2019/08/Cancha-de-f%C3%BAtbol-11.jpg",
+        img: imagenURL,
         name: nombre,
         price: String(precioPorHora),
         type: tipoCancha,
       };
+
       setCourtData(parsedCourt);
     } catch (error) {
       console.error(error);
@@ -58,7 +63,7 @@ const Cancha = () => {
         target: { value },
       } = e;
       if (!value) return;
-      setBookingDay(value);
+      setBookingDate(value);
       const availableTimeSlots = await apiClient<string[]>(
         `/api/reservas/slots-disponibles?canchaId=${id}&fecha=${value}`
       );
@@ -97,7 +102,7 @@ const Cancha = () => {
             {/* Cancha Header */}
             <div className="flex gap-5 items-center">
               <button
-                className="cursor-pointer rounded-xl border-2 border-green-dark p-2 hover:scale-102 transition duration-75"
+                className="cursor-pointer rounded-xl hover:scale-106 transition duration-75"
                 onClick={back}
               >
                 <div className="w-4 h-4 border-l-2 border-b-2 border-green-dark rotate-45 ml-1"></div>
@@ -108,58 +113,89 @@ const Cancha = () => {
             {/* Detalles cancha */}
             <div className="grid grid-cols-[3fr_2fr] gap-5">
               <div className="flex flex-col gap-3">
-                <div className="relative w-full h-80">
+                <div className="relative w-full h-60">
                   {img ? (
-                    <Image
+                    <img
                       src={img}
                       alt="court-image"
-                      className="rounded-2xl object-cover"
-                      fill
-                      priority
+                      className="rounded-2xl object-cover w-full h-full"
                     />
                   ) : null}
+                  <p className="absolute bg-green-light px-2 py-1 rounded-xl text-lg font-semibold  top-3 left-3">
+                    {type}
+                  </p>
+                  <p className="bg-green-light px-2 py-1 rounded-xl text-lg font-semibold absolute top-3 left-30">
+                    {formatoCOP.format(Number(price)).replace(/\s/g, "")}
+                  </p>
+                </div>
+                <div>
+                  <div className="flex gap-1">
+                    <img
+                      width="16"
+                      height="16"
+                      src="https://img.icons8.com/forma-thin/24/marker.png"
+                      alt="marker"
+                      className="object-contain"
+                    />
+                    <p className="text-lg italic">{address}</p>
+                  </div>
                 </div>
                 <CourtIndications />
               </div>
-
               {/* Bloques disponibles */}
-              <div className="bg-green-dark rounded-2xl p-5">
-                <div className="flex flex-col gap-5">
-                  <div className="space-y-2 flex flex-col items-center bg-green-light p-3 py-5 rounded-2xl">
-                    <p className="font-bold text-xl text-text-dark">
-                      Selecciona la fecha de reserva
-                    </p>
-                    <input
-                      disabled={isTimeSlotsLoading}
-                      type="date"
-                      className="w-full max-w-xs rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300"
-                      onChange={handleDateOnChange}
-                      value={bookingDay}
-                      min={new Date().toISOString().split("T")[0]}
-                      max={
-                        new Date(Date.now() + 15 * 24 * 60 * 60 * 1000)
-                          .toISOString()
-                          .split("T")[0]
-                      }
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    {isTimeSlotsLoading && <p>Cargando bloques disponibles</p>}
-                    {!isTimeSlotsLoading &&
-                      timeSlots?.map((ts) => (
-                        <button
-                          onClick={() => {
-                            setOpenConfirmationModal(true);
-                            setSelectedTime(ts);
-                          }}
-                          key={ts}
-                          className="bg-green-light text-text-dark py-2 rounded-4xl text-xl text-center cursor-pointer hover:scale-102 transition duration-75"
-                        >
-                          {ts}
-                        </button>
-                      ))}
-                  </div>
+              <div className="bg-green-dark rounded-2xl p-2 flex flex-col">
+                {/* Contenedor de Fecha */}
+                <div className="space-y-3 flex flex-col items-center rounded-2xl p-3">
+                  <p className="font-semibold text-2xl text-custom-white">
+                    Selecciona una fecha
+                  </p>
+                  <input
+                    disabled={isTimeSlotsLoading}
+                    type="date"
+                    className="w-full max-w-xs rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300"
+                    onChange={handleDateOnChange}
+                    value={bookingDate}
+                    min={new Date().toISOString().split("T")[0]}
+                    max={
+                      new Date(Date.now() + 15 * 24 * 60 * 60 * 1000)
+                        .toISOString()
+                        .split("T")[0]
+                    }
+                  />
                 </div>
+                {/* Estado Cargando */}
+                {isTimeSlotsLoading && (
+                  <div className="bg-custom-white h-full rounded-2xl px-3 flex justify-center items-center">
+                    <p className="text-center text-xl">
+                      Cargando horarios disponibles
+                    </p>
+                  </div>
+                )}
+                {/* Estado Vacío */}
+                {noTimeSlotsFound && (
+                  <div className="bg-custom-white h-full rounded-2xl px-3 flex justify-center items-center">
+                    <p className="text-center text-xl">
+                      No hay horarios disponibles para la fecha seleccionada
+                    </p>
+                  </div>
+                )}
+                {/* Contenedor de horas */}
+                {!isTimeSlotsLoading && !noTimeSlotsFound && (
+                  <div className="grid grid-cols-2 gap-3 bg-custom-white p-3 rounded-2xl h-full">
+                    {timeSlots?.map((ts) => (
+                      <button
+                        onClick={() => {
+                          setOpenConfirmationModal(true);
+                          setSelectedTime(ts);
+                        }}
+                        key={ts}
+                        className="bg-green-light text-text-dark py-2 rounded-4xl text-xl text-center cursor-pointer hover:scale-102 transition duration-75"
+                      >
+                        {ts}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -169,7 +205,7 @@ const Cancha = () => {
         open={openConfirmationModal}
         setOpen={setOpenConfirmationModal}
         courtData={courtData}
-        selectedDate={bookingDay}
+        selectedDate={bookingDate}
         selectedTime={selectedTime}
         setOpenToast={setOpenToast}
         openToast={openToast}

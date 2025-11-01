@@ -10,7 +10,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex h-screen">
-      <aside className="w-64 flex-shrink-0 bg-green-dark p-6 flex flex-col justify-between shadow-2xl">
+      <aside className="w-55 flex-shrink-0 bg-green-dark p-6 flex flex-col justify-between shadow-2xl">
         <div>
           <Link
             href="/dashboard"

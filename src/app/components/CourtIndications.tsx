@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const CourtIndications = () => {
   return (
     <div className="flex flex-col gap-2">
@@ -6,24 +8,16 @@ const CourtIndications = () => {
       </h3>
       <ol className="list-decimal list-inside font-bold flex flex-col gap-3">
         <li className="font-bold">
-          Reserva anticipada:
-          <span className="font-normal ml-1.5">
-            Realiza tu reserva con al menos 1 día de anticipación vía web,
-            teléfono o en recepción.
-          </span>
-        </li>
-        <li className="font-bold">
           Duración y puntualidad:
           <span className="font-normal ml-1.5">
-            Cada turno dura 60 minutos. Se recomienda llegar 15 minutos
-            antes del horario reservado.
+            Cada turno dura 60 minutos. Se recomienda llegar 15 minutos antes
+            del horario reservado.
           </span>
         </li>
         <li className="font-bold">
           Cancelaciones:
           <span className="font-normal ml-1.5">
-            Puedes cancelar o reprogramar con 1 día de aviso. Pasado ese
-            plazo, se cobrará el turno.
+            Puedes cancelar dirigiéndote a la pestaña <Link href="/mis_reservas" className="underline text-green-dark">Mis Reservas</Link>.
           </span>
         </li>
         <li className="font-bold">

@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         // CASO 1: Token Válido (200 OK)
         const data = await res.json();
 
-        const userData: User = { name: data.username, id: data.id };
+        const userData: User = { name: data.username, id: data.id, email: data.email, lastName: data.apellido };
         console.log("Sesión restaurada para el usuario:", userData);
         setUser(userData);
       } else if (res.status === 401 || res.status === 403) {

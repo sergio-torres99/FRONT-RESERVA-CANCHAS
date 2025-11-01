@@ -55,7 +55,12 @@ const LoginForm: React.FC = () => {
       if (response.ok) {
         // ÉXITO: El backend devolvió { token: "...", user: {...} }
         const jwtToken: string = data.token;
-        const userData: User = { name: data.nombre, id: data.id };
+        const userData: User = {
+          name: data.nombre,
+          id: data.id,
+          email: data?.email || "",
+          lastName: data?.apellido || "",
+        };
         // Llamamos a la función global de login
         login(jwtToken, userData);
       } else if (response.status === 401) {
@@ -141,7 +146,10 @@ const LoginForm: React.FC = () => {
         {/* Botón de Regresar/Registrar */}
         <p className="flex gap-2">
           ¿No tienes una cuenta?
-          <Link href="/register" className="font-semibold hover:scale-102 transition duration-75 text-green-dark">
+          <Link
+            href="/register"
+            className="font-semibold hover:scale-102 transition duration-75 text-green-dark"
+          >
             Regístrate aquí
           </Link>
         </p>

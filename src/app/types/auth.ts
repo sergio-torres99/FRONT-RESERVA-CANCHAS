@@ -24,5 +24,7 @@ export type AuthResponse = string;
 export interface User {
   name: string;
   id: number;
+  lastName: string;
+  email: string
   // Añade aquí más campos (ej: role)
 }

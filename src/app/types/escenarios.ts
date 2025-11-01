@@ -12,4 +12,6 @@ export type CourtsResponse = {
   nombre: string;
   tipoCancha: string;
   precioPorHora: number;
+  imagenURL: string;
+  ubicacion: string;
 };
